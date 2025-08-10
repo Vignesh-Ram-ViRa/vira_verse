@@ -56,12 +56,9 @@ Vira Ledger	An app to manage my finances	https://www.google.com	https://github.c
 The Vira Story	My portfolio app that seconds as my resume	https://www.google.com	https://github.com/Vignesh-Ram-ViRa/vira_portfolio	https://media.githubusercontent.com/media/Vignesh-Ram-ViRa/vira_assets/refs/heads/main/public/assets/images/vira_verse/preview.png	Completed	Career	2025	TRUE	FALSE
 Vira Library	An app to record all AI tools I come across	https://www.google.com	https://github.com/Vignesh-Ram-ViRa/vira_library	https://media.githubusercontent.com/media/Vignesh-Ram-ViRa/vira_assets/refs/heads/main/public/assets/images/vira_verse/preview.png	In Progress	Knowledge	2025	FALSE	FALSE
 
-For look and feel reuse vira story project tab's exact look and feel.
-go through this requirements and our cursorRules. ask if you have any questions and clarifications.
-We will discuss further and get clear of our requirements and start development only when i explicitly ask you to "start development"
-
 
 ## supabase
-N@rutoUzumaki130892
-uqrlvppsnppobzowlcqw
-postgresql://postgres:[YOUR-PASSWORD]@db.uqrlvppsnppobzowlcqw.supabase.co:5432/postgres
+pwd: N@rutoUzumaki130892
+project id: uqrlvppsnppobzowlcqw
+project name: vira_direct_data
+connection url: postgresql://postgres:N@rutoUzumaki130892@db.uqrlvppsnppobzowlcqw.supabase.co:5432/postgres
