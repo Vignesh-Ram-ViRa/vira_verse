@@ -9,13 +9,13 @@ const ThemeToggle = ({ className = '' }) => {
   const getThemeIcon = () => {
     switch (theme) {
       case 'light':
-        return 'lightBulb';
+        return 'Lightbulb';
       case 'dark':
-        return 'symbolMethod';
+        return 'CircleFilled';
       case 'pastel':
-        return 'symbolColor';
+        return 'SymbolColor';
       default:
-        return 'lightBulb';
+        return 'Lightbulb';
     }
   };
 

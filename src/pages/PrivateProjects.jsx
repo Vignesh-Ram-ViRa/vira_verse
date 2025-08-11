@@ -6,6 +6,8 @@ import { LANGUAGE_CONTENT } from '../constants/language';
 import Icon from '../components/atoms/Icon';
 import Button from '../components/atoms/Button';
 import ProjectModal from '../components/organisms/ProjectModal/ProjectModal.jsx';
+import ViewToggle from '../components/molecules/ViewToggle/ViewToggle.jsx';
+import ProjectList from '../components/organisms/ProjectList/ProjectList.jsx';
 import './ProjectsPage.css';
 
 const PrivateProjects = () => {
@@ -13,6 +15,7 @@ const PrivateProjects = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentView, setCurrentView] = useState('grid'); // 'grid' or 'list'
   
   // Modal state
   const [modalState, setModalState] = useState({
@@ -21,7 +24,7 @@ const PrivateProjects = () => {
     project: null
   });
 
-  const { isOwner } = useAuth();
+  const { isOwner, isAuthenticated } = useAuth();
 
   // Load private projects only
   const loadProjects = async () => {
@@ -186,6 +189,12 @@ const PrivateProjects = () => {
 
           {/* Add Project Button - Round glowing gradient button (RIGHT side) */}
           <div className="projects-controls__actions">
+            {/* View Toggle */}
+            <ViewToggle 
+              currentView={currentView}
+              onViewChange={setCurrentView}
+            />
+            
             <button
               className="add-project-btn"
               onClick={handleAddProject}
@@ -277,105 +286,120 @@ const PrivateProjects = () => {
           </motion.div>
         )}
 
-        {/* Projects Grid - Owner Only */}
+        {/* Projects Display - Grid or List View - Owner Only */}
         {!loading && !error && filteredProjects.length > 0 && isOwner && (
           <motion.div 
-            className="projects-grid"
+            className="projects-container"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className={`project-card ${project.featured ? 'featured' : ''} private`}
-                onClick={() => handleProjectClick(project)}
-              >
-                {/* Project Image/Preview */}
-                <div
-                  className="project-image"
-                  onClick={(e) => handleLiveClick(project.link, e)}
-                  title="View Live Demo"
-                >
-                  {project.preview_image_url ? (
-                    <img 
-                      src={project.preview_image_url} 
-                      alt={project.title}
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : (
-                    <div className="project-placeholder">
-                      <Icon name="folder" />
-                    </div>
-                  )}
-
-                  {/* Featured Badge - Top Left */}
-                  {project.featured && (
-                    <div className="featured-badge" title="Featured Project">
-                      ⭐
-                    </div>
-                  )}
-
-                  {/* GitHub Button - Top Right */}
-                  {project.github && (
-                    <button
-                      className="github-btn"
-                      onClick={(e) => handleGitHubClick(project.github, e)}
-                      title="View Source Code"
+            {currentView === 'grid' ? (
+              <div className="projects-grid">
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    className={`project-card ${project.featured ? 'featured' : ''} private`}
+                    onClick={() => handleProjectClick(project)}
+                  >
+                    {/* Project Image/Preview */}
+                    <div
+                      className="project-image"
+                      onClick={(e) => handleLiveClick(project.link, e)}
+                      title="View Live Demo"
                     >
-                      <Icon name="github" />
-                    </button>
-                  )}
+                      {project.preview_image_url ? (
+                        <img 
+                          src={project.preview_image_url} 
+                          alt={project.title}
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                      ) : (
+                        <div className="project-placeholder">
+                          <Icon name="folder" />
+                        </div>
+                      )}
 
-                  {/* Private Badge - Bottom Right */}
-                  <div className="private-badge" title="Private Project">
-                    <Icon name="lock" />
+                      {/* Fallback placeholder for failed images */}
+                      <div className="project-placeholder" style={{ display: 'none' }}>
+                        <Icon name="folder" />
+                      </div>
+
+                      {/* Featured Icon - Top LEFT corner */}
+                      {project.featured && (
+                        <div className="featured-badge">
+                          <Icon name="StarFull" />
+                        </div>
+                      )}
+
+                      {/* GitHub Icon - Top RIGHT corner (moved from action buttons) */}
+                      {project.github && (
+                        <div className="github-badge">
+                          <Icon name="Github" />
+                        </div>
+                      )}
+
+                      {/* Preview/Link button on image click */}
+                      {project.link && (
+                        <div className="preview-overlay">
+                          <Icon name="LinkExternal" className="preview-icon" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Project Content */}
+                    <div className="project-content">
+                      <div className="project-header">
+                        <h3 className="project-title">{project.title}</h3>
+                        
+                        {/* Action Buttons */}
+                        <div className="project-actions">
+                          {project.private && (
+                            <button
+                              className="action-btn private-btn"
+                              title="Private Project"
+                            >
+                              <Icon name="Lock" />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      <p className="project-description">{project.description}</p>
+                      
+                      {/* Project Meta Tags */}
+                      <div className="project-meta">
+                        <div className="meta-tags">
+                          {project.category && (
+                            <span className="project-tag tag-category">{project.category}</span>
+                          )}
+                          {project.year && (
+                            <span className="project-tag tag-year">{project.year}</span>
+                          )}
+                          {project.status && (
+                            <span className={`project-tag tag-status ${project.status}`}>
+                              {project.status.replace('-', ' ')}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Click hint overlay */}
-                  <div className="click-hint">
-                    <Icon name="linkExternal" />
-                    <span>View Live Demo</span>
-                  </div>
-                </div>
-
-                {/* Project Content */}
-                <div className="project-content">
-                  <div className="project-header">
-                    <h3 className="project-name">{project.title}</h3>
-                  </div>
-
-                  <p className="project-description">
-                    {project.description || 'No description available.'}
-                  </p>
-
-                  {/* Project Tags */}
-                  <div className="project-tags">
-                    {project.year && (
-                      <span className="project-tag tag-year">
-                        {project.year}
-                      </span>
-                    )}
-                    {project.category && (
-                      <span className="project-tag tag-category">
-                        {project.category}
-                      </span>
-                    )}
-                    {project.status && (
-                      <span className={`project-tag tag-status ${getStatusClass(project.status)}`}>
-                        {project.status}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Hover Glow Effect */}
-                <div className="project-glow" />
+                ))}
               </div>
-            ))}
+            ) : (
+              /* List View */
+              <ProjectList
+                projects={filteredProjects}
+                onProjectClick={handleProjectClick}
+                onGithubClick={(url) => handleGitHubClick(url, null)}
+                onPreviewClick={(url) => handleLiveClick(url, null)}
+                canEdit={isOwner}
+              />
+            )}
           </motion.div>
         )}
       </div>

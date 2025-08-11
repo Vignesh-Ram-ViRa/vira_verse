@@ -1,0 +1,98 @@
+.view-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  padding: 0.25rem;
+}
+
+.view-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.view-toggle-btn:hover {
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  transform: scale(1.05);
+}
+
+.view-toggle-btn.active {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+}
+
+/* Remove the border between buttons */
+.view-toggle-btn:first-child {
+  margin-right: 0.25rem;
+}
+
+/* Theme-specific enhancements - IMPROVED */
+[data-theme="light"] .view-toggle {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .view-toggle-btn:hover {
+  background: #F1F5F9;
+}
+
+[data-theme="light"] .view-toggle-btn.active {
+  background: #0891B2;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+}
+
+[data-theme="dark"] .view-toggle {
+  background: #334155;
+  border-color: #475569;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .view-toggle-btn {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .view-toggle-btn:hover {
+  background: #475569;
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .view-toggle-btn.active {
+  background: #ff6b35;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+[data-theme="pastel"] .view-toggle {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 107, 157, 0.3);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(255, 107, 157, 0.1);
+}
+
+[data-theme="pastel"] .view-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="pastel"] .view-toggle-btn.active {
+  background: #ff6b9d;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+} 

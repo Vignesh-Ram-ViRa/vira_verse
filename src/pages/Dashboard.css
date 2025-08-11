@@ -181,9 +181,16 @@
   max-width: 35rem;
 }
 
+/* Dashboard Controls - Updated layout with View Toggle */
 .dashboard-controls__actions {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+/* View Toggle spacing */
+.dashboard-controls__actions .view-toggle {
+  margin-right: 0.5rem;
 }
 
 /* Header Section */
@@ -427,7 +434,7 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   width: 100%;
 }
 
@@ -535,7 +542,7 @@
 }
 
 /* Project Buttons and Badges */
-.github-btn {
+.github-btn-tile {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
@@ -581,19 +588,20 @@
 
 .private-badge {
   position: absolute;
-  bottom: 0.75rem;
+  top: 0.75rem;
   right: 0.75rem;
-  background: rgba(239, 68, 68, 0.9);
+  background: rgba(107, 114, 128, 0.9);
   border: none;
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 0.75rem;
+  font-size: 1rem;
   z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Click Hint */
@@ -1016,4 +1024,30 @@
   background: #FEE2E2;
   color: #DC2626;
   border-color: #FECACA;
+} 
+
+/* Preview/Link button styling */
+.preview-btn-tile {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: rgba(var(--color-primary-rgb), 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.preview-btn:hover {
+  background: rgba(var(--color-primary-rgb), 1);
+  transform: scale(1.1);
 } 

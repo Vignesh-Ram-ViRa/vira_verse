@@ -6,6 +6,8 @@ import { LANGUAGE_CONTENT } from '../constants/language';
 import Icon from '../components/atoms/Icon';
 import Button from '../components/atoms/Button';
 import ProjectModal from '../components/organisms/ProjectModal/ProjectModal.jsx';
+import ViewToggle from '../components/molecules/ViewToggle/ViewToggle.jsx';
+import ProjectList from '../components/organisms/ProjectList/ProjectList.jsx';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -13,6 +15,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentView, setCurrentView] = useState('grid'); // 'grid' or 'list'
   
   // Modal state
   const [modalState, setModalState] = useState({
@@ -173,6 +176,18 @@ const Dashboard = () => {
     }
   };
 
+  const handleGithub = (url) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const handlePreview = (url) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="dashboard-page">
       {/* Hero Banner */}
@@ -248,6 +263,12 @@ const Dashboard = () => {
 
             {/* Add Project Button - Round glowing gradient button (RIGHT side) */}
             <div className="dashboard-controls__actions">
+              {/* View Toggle */}
+              <ViewToggle 
+                currentView={currentView}
+                onViewChange={setCurrentView}
+              />
+              
               <button
                 className="add-project-btn"
                 onClick={handleAddProject}
@@ -290,7 +311,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Projects Grid */}
+        {/* Projects Display - Grid or List View */}
         {!loading && !error && (
           <motion.div 
             className="projects-container"
@@ -298,131 +319,142 @@ const Dashboard = () => {
             initial="hidden"
             animate="visible"
           >
-            <div className="projects-grid">
-              {filteredProjects.length === 0 && searchTerm ? (
-                <motion.div 
-                  className="no-results"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Icon name="search" size={48} />
-                  <h3>No projects found</h3>
-                  <p>Try adjusting your search terms or clearing the search to see all projects.</p>
-                  <button 
-                    className="clear-search-btn-large"
-                    onClick={() => setSearchTerm('')}
+            {currentView === 'grid' ? (
+              <div className="projects-grid">
+                {filteredProjects.length === 0 && searchTerm ? (
+                  <motion.div 
+                    className="no-results"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <Icon name="close" />
-                    Clear Search
-                  </button>
-                </motion.div>
-              ) : (
-                filteredProjects.map((project) => (
-                  <motion.div
-                    key={project.id}
-                    className={`project-card ${project.featured ? 'featured' : ''} ${project.private ? 'private' : ''}`}
-                    variants={cardVariants}
-                    whileHover="hover"
-                    onClick={() => handleProjectClick(project)}
-                  >
-                    {/* Project Image/Preview */}
-                    <div className="project-image">
-                      {project.preview_image_url ? (
-                        <img 
-                          src={project.preview_image_url}
-                          alt={project.title}
-                          loading="lazy"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'flex';
-                          }}
-                        />
-                      ) : (
-                        <div className="image-placeholder">
-                          <Icon name="file-code" size={48} />
-                          <span>Project Preview</span>
-                        </div>
-                      )}
-                      
-                      <div className="image-fallback" style={{ display: 'none' }}>
-                        <Icon name="file-code" size={48} />
-                        <span>Project Preview</span>
-                      </div>
-                      
-                      {/* Featured Badge - Top Left */}
-                      {project.featured && (
-                        <div className="featured-badge" title="Featured Project">
-                          ⭐
-                        </div>
-                      )}
-
-                      {/* GitHub Button - Top Right */}
-                      {project.github && (
-                        <button 
-                          className="github-btn"
-                          onClick={(e) => handleGitHubClick(project.github, e)}
-                          title="View Source Code"
-                        >
-                          <Icon name="github" />
-                        </button>
-                      )}
-
-                      {/* Private Badge */}
-                      {project.private && (
-                        <div className="private-badge" title="Private Project">
-                          <Icon name="lock" />
-                        </div>
-                      )}
-
-                      {/* Click hint overlay */}
-                      {project.link && (
-                        <div 
-                          className="click-hint"
-                          onClick={(e) => handleLiveClick(project.link, e)}
-                        >
-                          <Icon name="link-external" />
-                          <span>View Live Demo</span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Project Content */}
-                    <div className="project-content">
-                      <div className="project-header">
-                        <h3 className="project-name">{project.title}</h3>
-                      </div>
-
-                      <p className="project-description">
-                        {project.description || 'No description available.'}
-                      </p>
-
-                      {/* Project Tags */}
-                      <div className="project-tags">
-                        {project.year && (
-                          <span className="project-tag tag-year">
-                            {project.year}
-                          </span>
-                        )}
-                        {project.category && (
-                          <span className="project-tag tag-category">
-                            {project.category}
-                          </span>
-                        )}
-                        {project.status && (
-                          <span className={`project-tag tag-status ${getStatusClass(project.status)}`}>
-                            {project.status}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Hover Glow Effect */}
-                    <div className="project-glow" />
+                    <Icon name="search" size={48} />
+                    <h3>No projects found</h3>
+                    <p>Try adjusting your search terms or clearing the search to see all projects.</p>
+                    <button 
+                      className="clear-search-btn-large"
+                      onClick={() => setSearchTerm('')}
+                    >
+                      <Icon name="close" />
+                      Clear Search
+                    </button>
                   </motion.div>
-                ))
-              )}
-            </div>
+                ) : (
+                  filteredProjects.map((project) => (
+                    <motion.div
+                      key={project.id}
+                      className={`project-card ${project.featured ? 'featured' : ''} ${project.private ? 'private' : ''}`}
+                      variants={cardVariants}
+                      whileHover="hover"
+                      onClick={() => handleProjectClick(project)}
+                    >
+                      {/* Project Image/Preview */}
+                      <div className="project-image">
+                        {project.preview_image_url ? (
+                          <img 
+                            src={project.preview_image_url}
+                            alt={project.title}
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                        ) : (
+                          <div className="project-placeholder">
+                            <Icon name="Folder" size={2.5} />
+                          </div>
+                        )}
+
+                        {/* Fallback placeholder for failed images */}
+                        <div className="project-placeholder" style={{ display: 'none' }}>
+                          <Icon name="Folder" size={2.5} />
+                        </div>
+
+                        {/* Featured Icon - Top LEFT corner */}
+                        {project.featured && (
+                          <div className="featured-badge">
+                            <Icon name="StarFull" />
+                          </div>
+                        )}
+
+                        {/* Private Icon - Top RIGHT corner */}
+                        {project.private && (
+                          <div className="private-badge">
+                            <Icon name="Lock" />
+                          </div>
+                        )}
+
+                        {/* Preview/Link button on image click */}
+                        {project.link && (
+                          <button
+                            className="preview-btn-tile"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handlePreview(project.link);
+                            }}
+                            title="View live demo"
+                          >
+                            <Icon name="LinkExternal" />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Project Content */}
+                      <div className="project-content">
+                        <div className="project-header">
+                          <h3 className="project-title">{project.title}</h3>
+                          
+                          {/* Action Buttons */}
+                          <div className="project-actions">
+                            {project.github && (
+                              <button
+                                className="action-btn github-btn-tile"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleGithub(project.github);
+                                }}
+                                title="View on GitHub"
+                              >
+                                <Icon name="Github" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+
+                        <p className="project-description">{project.description}</p>
+                        
+                        {/* Project Meta Tags */}
+                        <div className="project-meta">
+                          <div className="meta-tags">
+                            {project.category && (
+                              <span className="project-tag tag-category">{project.category}</span>
+                            )}
+                            {project.year && (
+                              <span className="project-tag tag-year">{project.year}</span>
+                            )}
+                            {project.status && (
+                              <span className={`project-tag tag-status ${project.status}`}>
+                                {project.status.replace('-', ' ')}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))
+                )}
+              </div>
+            ) : (
+              /* List View */
+              <ProjectList
+                projects={filteredProjects}
+                onProjectClick={handleProjectClick}
+                onGithubClick={handleGithub}
+                onPreviewClick={handlePreview}
+                canEdit={isOwner}
+              />
+            )}
           </motion.div>
         )}
       </div>

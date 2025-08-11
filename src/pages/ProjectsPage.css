@@ -232,6 +232,63 @@
   height: 100%;
 }
 
+/* View Toggle spacing */
+.projects-controls__actions .view-toggle {
+  margin-right: 0.5rem;
+}
+
+/* GitHub badge for private projects - Top RIGHT corner */
+.github-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(36, 41, 47, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.github-badge:hover {
+  background: rgba(36, 41, 47, 1);
+  transform: scale(1.1);
+}
+
+/* Preview/Link button styling */
+.preview-btn {
+  /* position: absolute; */
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: rgba(var(--color-primary-rgb), 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.preview-btn:hover {
+  background: rgba(var(--color-primary-rgb), 1);
+  transform: scale(1.1);
+}
+
 /* Search Results */
 .search-results {
   text-align: center;
@@ -308,7 +365,7 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   margin-top: 2rem;
 }
 
