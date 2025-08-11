@@ -387,3 +387,142 @@
     padding: 0.5rem;
   }
 } 
+
+/* Pastel Theme Enhancements - Glassmorphism Style */
+[data-theme="pastel"] .projects-header {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="pastel"] .projects-title {
+  background: linear-gradient(135deg, #8B5FBF 0%, #A855F7 50%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="pastel"] .project-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(139, 95, 191, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="pastel"] .project-card:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(139, 95, 191, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-4px);
+}
+
+[data-theme="pastel"] .search-input {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 4px 20px rgba(139, 95, 191, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="pastel"] .search-input:focus {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(139, 95, 191, 0.4);
+  box-shadow: 
+    0 0 0 3px rgba(139, 95, 191, 0.15),
+    0 8px 25px rgba(139, 95, 191, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="pastel"] .add-project-btn {
+  background: linear-gradient(135deg, #8B5FBF 0%, #A855F7 100%);
+  box-shadow: 
+    0 6px 25px rgba(139, 95, 191, 0.4),
+    0 0 35px rgba(139, 95, 191, 0.2);
+}
+
+[data-theme="pastel"] .add-project-btn:hover {
+  background: linear-gradient(135deg, #7A4FB8 0%, #9333EA 100%);
+  box-shadow: 
+    0 12px 40px rgba(139, 95, 191, 0.5),
+    0 0 60px rgba(139, 95, 191, 0.3);
+} 
+
+/* Light Theme Enhancements - Clean Modern Design */
+[data-theme="light"] .projects-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .projects-title {
+  background: linear-gradient(135deg, #0891B2 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .project-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .project-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .search-input {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .search-input:focus {
+  border-color: #0891B2;
+  box-shadow: 
+    0 0 0 3px rgba(8, 145, 178, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .add-project-btn {
+  background: linear-gradient(135deg, #0891B2 0%, #06B6D4 100%);
+  box-shadow: 0 4px 14px 0 rgba(8, 145, 178, 0.3);
+}
+
+[data-theme="light"] .add-project-btn:hover {
+  background: linear-gradient(135deg, #0E7490 0%, #0891B2 100%);
+  box-shadow: 0 6px 20px 0 rgba(8, 145, 178, 0.4);
+}
+
+/* Clean status indicators */
+[data-theme="light"] .project-tag {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+
+[data-theme="light"] .tag-status.completed {
+  background: #DCFCE7;
+  color: #059669;
+  border-color: #BBF7D0;
+}
+
+[data-theme="light"] .tag-status.in-progress {
+  background: #FEF3C7;
+  color: #D97706;
+  border-color: #FDE68A;
+}
+
+[data-theme="light"] .tag-status.not-started {
+  background: #FEE2E2;
+  color: #DC2626;
+  border-color: #FECACA;
+} 

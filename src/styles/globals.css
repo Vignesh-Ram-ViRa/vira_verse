@@ -245,6 +245,43 @@ img {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Light Theme Global Enhancements */
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  color: #0F172A;
+}
+
+[data-theme="light"] .app {
+  background: transparent;
+}
+
+/* Clean form elements for light theme */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] select:focus {
+  border-color: #0891B2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+}
+
+/* Clean modal and overlay styles */
+[data-theme="light"] .modal-overlay {
+  background: rgba(15, 23, 42, 0.75);
+}
+
+[data-theme="light"] .modal {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
 /* Print styles */
 @media print {
   body {

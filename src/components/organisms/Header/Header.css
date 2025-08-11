@@ -236,42 +236,61 @@
 }
 
 /* Theme-specific enhancements */
+/* Light Theme Enhancements - Clean Modern Header */
 [data-theme="light"] .header {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-bottom: 1px solid rgba(229, 231, 235, 0.8) !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="light"] .header__logo-text {
-  background: linear-gradient(135deg, #3b82f6, #10b981) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+[data-theme="light"] .header-logo {
+  background: linear-gradient(135deg, #0891B2 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-[data-theme="light"] .header__nav-link:hover,
-[data-theme="light"] .header__nav-link.active {
-  background: rgba(59, 130, 246, 0.1) !important;
-  color: #3b82f6 !important;
+[data-theme="light"] .nav-link {
+  color: #475569;
+  transition: all 0.2s ease;
 }
 
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active {
+  background: #F1F5F9;
+  color: #0891B2;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Pastel Theme Enhancements */
 [data-theme="pastel"] .header {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border-bottom: 1px solid rgba(196, 181, 253, 0.4) !important;
-  box-shadow: 0 1px 3px 0 rgba(167, 139, 250, 0.1) !important;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 [data-theme="pastel"] .header__logo-text {
-  background: linear-gradient(135deg, #a78bfa, #fb7185) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+  background: linear-gradient(135deg, #8B5FBF 0%, #A855F7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="pastel"] .header__nav-link {
+  color: rgba(55, 65, 81, 0.8);
 }
 
 [data-theme="pastel"] .header__nav-link:hover,
 [data-theme="pastel"] .header__nav-link.active {
-  background: rgba(167, 139, 250, 0.1) !important;
-  color: #a78bfa !important;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #8B5FBF;
+  box-shadow: 
+    0 4px 15px rgba(139, 95, 191, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive Design */

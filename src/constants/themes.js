@@ -6,37 +6,37 @@ export const THEMES = {
 
 export const THEME_CONFIG = {
   [THEMES.LIGHT]: {
-    name: 'Formal Light',
+    name: 'Professional Light',
     colors: {
-      // Primary brand colors
-      primary: '#3b82f6',
-      primaryHover: '#1e40af',
-      primaryRgb: '59, 130, 246',
-      accent: '#10b981',
-      accentRgb: '16, 185, 129',
+      // Primary brand colors (teal/cyan from screenshot)
+      primary: '#0891B2',
+      primaryHover: '#0E7490',
+      primaryRgb: '8, 145, 178',
+      accent: '#06B6D4',
+      accentRgb: '6, 182, 212',
 
-      // Background colors
-      background: '#ffffff',
-      backgroundSecondary: '#f8fafc',
-      surface: 'rgba(255, 255, 255, 0.95)',
-      surfaceElevated: 'rgba(248, 250, 252, 0.95)',
+      // Background colors (clean whites and very light grays)
+      background: 'linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%)',
+      backgroundSecondary: '#F1F5F9',
+      surface: '#FFFFFF',
+      surfaceElevated: '#FFFFFF',
 
-      // Text colors
-      textPrimary: '#1e293b',
-      textSecondary: '#64748b',
-      textMuted: '#94a3b8',
+      // Text colors (modern gray hierarchy)
+      textPrimary: '#0F172A',
+      textSecondary: '#475569',
+      textMuted: '#94A3B8',
 
-      // Border and interactive
-      border: 'rgba(226, 232, 240, 0.8)',
-      borderHover: 'rgba(59, 130, 246, 0.3)',
+      // Border and interactive (subtle and clean)
+      border: '#E2E8F0',
+      borderHover: '#CBD5E1',
 
-      // Status colors
-      success: '#10b981',
-      warning: '#f59e0b',
-      error: '#ef4444',
-      info: '#3b82f6',
+      // Status colors (modern and accessible)
+      success: '#059669',
+      warning: '#D97706',
+      error: '#DC2626',
+      info: '#0891B2',
 
-      // Shadows
+      // Clean shadows (very subtle)
       shadowSm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
       shadowMd: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
       shadowLg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
@@ -93,40 +93,40 @@ export const THEME_CONFIG = {
   [THEMES.PASTEL]: {
     name: 'Fun Pastel',
     colors: {
-      // Primary brand colors (vibrant pastels)
-      primary: '#ff6b9d',
-      primaryHover: '#e55a8a',
-      primaryRgb: '255, 107, 157',
-      accent: '#4ecdc4',
-      accentRgb: '78, 205, 196',
+      // Primary brand colors (soft purple/violet palette)
+      primary: '#8B5FBF',
+      primaryHover: '#7A4FB8',
+      primaryRgb: '139, 95, 191',
+      accent: '#A855F7',
+      accentRgb: '168, 85, 247',
 
-              // Background colors (vibrant and playful with 3D depth)
-        background: 'radial-gradient(ellipse at top left, #c8b5e6 0%, #e6d7ff 30%, #f0e6ff 60%, #ddd0f0 100%)',
-        backgroundSecondary: 'linear-gradient(135deg, #a8edea 0%, #e6d7ff 100%)',
-      surface: 'rgba(255, 255, 255, 0.95)',
-      surfaceElevated: 'rgba(255, 255, 255, 0.98)',
+      // Background colors (soft purple gradient like screenshot)
+      background: 'radial-gradient(ellipse at top, #E5D4FF 0%, #F3E8FF 20%, #DDD6FE 40%, #C4B5FD 80%, #A78BFA 100%)',
+      backgroundSecondary: 'linear-gradient(135deg, #F3E8FF 0%, #E5D4FF 50%, #DDD6FE 100%)',
+      surface: 'rgba(255, 255, 255, 0.85)',
+      surfaceElevated: 'rgba(255, 255, 255, 0.95)',
 
-      // Text colors (vibrant but readable)
-      textPrimary: '#2d3748',
-      textSecondary: '#4a5568',
-      textMuted: '#718096',
+      // Text colors (darker for better contrast on light backgrounds)
+      textPrimary: '#374151',
+      textSecondary: '#6B7280',
+      textMuted: '#9CA3AF',
 
-      // Border and interactive
-      border: 'rgba(255, 107, 157, 0.2)',
-      borderHover: 'rgba(255, 107, 157, 0.4)',
+      // Border and interactive (soft purple tones)
+      border: 'rgba(139, 95, 191, 0.2)',
+      borderHover: 'rgba(139, 95, 191, 0.3)',
 
-      // Status colors (fun and vibrant)
-      success: '#48bb78',
-      warning: '#ed8936',
-      error: '#f56565',
-      info: '#4299e1',
+      // Status colors (soft but visible)
+      success: '#10B981',
+      warning: '#F59E0B',
+      error: '#EF4444',
+      info: '#3B82F6',
 
-      // Shadows (colorful)
-      shadowSm: '0 1px 2px 0 rgba(255, 107, 157, 0.15)',
-      shadowMd: '0 4px 6px -1px rgba(255, 107, 157, 0.2)',
-      shadowLg: '0 10px 15px -3px rgba(255, 107, 157, 0.25)',
-      shadowXl: '0 20px 25px -5px rgba(255, 107, 157, 0.3)',
-      shadow2xl: '0 25px 50px -12px rgba(255, 107, 157, 0.4)'
+      // Glassmorphism shadows (soft purple tints)
+      shadowSm: '0 2px 8px 0 rgba(139, 95, 191, 0.1)',
+      shadowMd: '0 4px 12px -2px rgba(139, 95, 191, 0.15)',
+      shadowLg: '0 10px 20px -4px rgba(139, 95, 191, 0.2)',
+      shadowXl: '0 20px 30px -8px rgba(139, 95, 191, 0.25)',
+      shadow2xl: '0 25px 40px -12px rgba(139, 95, 191, 0.3)'
     }
   }
 };
