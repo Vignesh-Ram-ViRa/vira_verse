@@ -1047,7 +1047,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.preview-btn:hover {
+.preview-btn-tile:hover {
   background: rgba(var(--color-primary-rgb), 1);
   transform: scale(1.1);
 } 

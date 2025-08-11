@@ -149,13 +149,13 @@ const PublicProjects = () => {
       <div className="projects-content">
         {/* Controls Section - Search on LEFT, Add button on RIGHT */}
         <motion.div 
-          className="projects-controls"
+          className="dashboard-controls"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.6 }}
         >
           {/* Search Bar - Now on the LEFT side */}
-          <div className="projects-controls__search">
+          <div className="dashboard-controls__search">
             <div className="projects-search">
               <div className="search-container">
                 <Icon name="search" className="search-icon" />
@@ -180,7 +180,7 @@ const PublicProjects = () => {
           </div>
 
           {/* Add Project Button - Round glowing gradient button (RIGHT side) */}
-          <div className="projects-controls__actions">
+          <div className="dashboard-controls__actions">
             {/* View Toggle */}
             <ViewToggle 
               currentView={currentView}
@@ -317,9 +317,16 @@ const PublicProjects = () => {
 
                       {/* Preview/Link button on image click */}
                       {project.link && (
-                        <div className="preview-overlay">
-                          <Icon name="LinkExternal" className="preview-icon" />
-                        </div>
+                        <button
+                          className="preview-btn-tile"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleLiveClick(project.link, e);
+                          }}
+                          title="View live demo"
+                        >
+                          <Icon name="LinkExternal" />
+                        </button>
                       )}
                     </div>
 
@@ -332,7 +339,7 @@ const PublicProjects = () => {
                         <div className="project-actions">
                           {project.github && (
                             <button
-                              className="action-btn github-btn"
+                              className="action-btn github-btn-tile"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleGitHubClick(project.github, e);
