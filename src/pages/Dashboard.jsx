@@ -214,50 +214,50 @@ const Dashboard = () => {
       {/* Projects Section */}
       <div className="dashboard-projects">
 
-        {/* Controls Section */}
-        <motion.div 
-          className="dashboard-controls"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          {/* Add Project Button (Always shown, disabled for guests) */}
-          <div className="dashboard-controls__actions">
-            <Button
-              variant="primary"
-              onClick={handleAddProject}
-              icon={<Icon name="add" />}
-              className="add-project-btn"
-              disabled={!isOwner}
-              title={!isOwner ? "Only the owner can add projects" : "Add new project"}
-            >
-              Add New Project
-            </Button>
-          </div>
-
-          {/* Search Bar */}
-          <div className="projects-search">
-            <div className="search-container">
-              <Icon name="search" className="search-icon" />
-              <input
-                type="text"
-                className="search-input"
-                placeholder={LANGUAGE_CONTENT.projects.searchPlaceholder}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              {searchTerm && (
-                <button 
-                  className="clear-search-btn"
-                  onClick={() => setSearchTerm('')}
-                  aria-label="Clear search"
-                >
-                  <Icon name="close" />
-                </button>
-              )}
+                  {/* Controls Section - Search on LEFT, Add button on RIGHT */}
+          <motion.div 
+            className="dashboard-controls"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            {/* Search Bar - Now on the LEFT side */}
+            <div className="dashboard-controls__search">
+              <div className="projects-search">
+                <div className="search-container">
+                  <Icon name="search" className="search-icon" />
+                  <input
+                    type="text"
+                    className="search-input"
+                    placeholder={LANGUAGE_CONTENT.projects.searchPlaceholder}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  {searchTerm && (
+                    <button 
+                      className="clear-search-btn"
+                      onClick={() => setSearchTerm('')}
+                      aria-label="Clear search"
+                    >
+                      <Icon name="close" />
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </motion.div>
+
+            {/* Add Project Button - Round glowing gradient button (RIGHT side) */}
+            <div className="dashboard-controls__actions">
+              <button
+                className="add-project-btn"
+                onClick={handleAddProject}
+                disabled={!isOwner}
+                title={!isOwner ? "Only the owner can add projects" : "Add new project"}
+              >
+                <Icon name="add" />
+              </button>
+            </div>
+          </motion.div>
 
         {/* Search Results Info */}
         {searchTerm && (

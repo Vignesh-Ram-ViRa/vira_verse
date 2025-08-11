@@ -8,8 +8,7 @@ import {
   signInWithMagicLink as supabaseSignInWithMagicLink,
   enterGuestMode,
   exitGuestMode,
-  isGuestMode,
-  isSuperAdmin
+  isGuestMode
 } from '../utils/supabase';
 
 // Create auth context

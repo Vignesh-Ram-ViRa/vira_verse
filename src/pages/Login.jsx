@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth.jsx';
 import Button from '../components/atoms/Button';
 import Icon from '../components/atoms/Icon';
@@ -90,185 +89,157 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="login-container">
-        <motion.div 
-          className="login-card"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+        {/* Header */}
+        <div className="login-header">
+          <h1 
+            className="login-title"
+          >
+            {isRegisterMode ? 'Create Account' : 'Welcome Back'}
+          </h1>
+          <p 
+            className="login-subtitle"
+          >
+            {isRegisterMode 
+              ? 'Join Vira Verse to manage your projects' 
+              : 'Sign in to access your project dashboard'
+            }
+          </p>
+        </div>
+
+        {/* Guest Mode Button */}
+        <div 
+          className="guest-mode-section"
         >
-          {/* Header */}
-          <div className="login-header">
-            <motion.h1 
-              className="login-title"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              {isRegisterMode ? 'Create Account' : 'Welcome Back'}
-            </motion.h1>
-            <motion.p 
-              className="login-subtitle"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              {isRegisterMode 
-                ? 'Join Vira Verse to manage your projects' 
-                : 'Sign in to access your project dashboard'
-              }
-            </motion.p>
+          <Button
+            variant="secondary"
+            onClick={handleGuestMode}
+            icon={<Icon name="organization" />}
+            className="guest-mode-btn"
+          >
+            Continue as Guest
+          </Button>
+          <p className="guest-mode-note">
+            Browse public projects without creating an account
+          </p>
+        </div>
+
+        <div className="login-divider">
+          <span>or</span>
+        </div>
+
+        {/* Auth Form */}
+        <form 
+          className="login-form"
+          onSubmit={handleSubmit}
+        >
+          {/* Email Field */}
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">
+              Email Address
+            </label>
+            <div className="form-input-wrapper">
+              <Icon name="mail" className="form-input-icon" />
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="form-input"
+                required
+                disabled={isLoading}
+              />
+            </div>
           </div>
 
-          {/* Guest Mode Button */}
-          <motion.div 
-            className="guest-mode-section"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            <Button
-              variant="secondary"
-              onClick={handleGuestMode}
-              icon={<Icon name="organization" />}
-              className="guest-mode-btn"
-            >
-              Continue as Guest
-            </Button>
-            <p className="guest-mode-note">
-              Browse public projects without creating an account
-            </p>
-          </motion.div>
-
-          <div className="login-divider">
-            <span>or</span>
-          </div>
-
-          {/* Auth Form */}
-          <motion.form 
-            className="login-form"
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            {/* Email Field */}
+          {/* Password Field (hidden for magic link) */}
+          {!useMagicLink && (
             <div className="form-group">
-              <label htmlFor="email" className="form-label">
-                Email Address
+              <label htmlFor="password" className="form-label">
+                Password
               </label>
               <div className="form-input-wrapper">
-                <Icon name="mail" className="form-input-icon" />
+                <Icon name="lock" className="form-input-icon" />
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
                   className="form-input"
                   required
                   disabled={isLoading}
+                  minLength={isRegisterMode ? 6 : undefined}
                 />
               </div>
             </div>
+          )}
 
-            {/* Password Field (hidden for magic link) */}
-            {!useMagicLink && (
-              <div className="form-group">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <div className="form-input-wrapper">
-                  <Icon name="lock" className="form-input-icon" />
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    className="form-input"
-                    required
-                    disabled={isLoading}
-                    minLength={isRegisterMode ? 6 : undefined}
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Error/Success Messages */}
-            {error && (
-              <motion.div 
-                className="form-message form-message--error"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Icon name="warning" />
-                <span>{error}</span>
-              </motion.div>
-            )}
-
-            {success && (
-              <motion.div 
-                className="form-message form-message--success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Icon name="check" />
-                <span>{success}</span>
-              </motion.div>
-            )}
-
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              variant="primary"
-              loading={isLoading}
-              disabled={!email || (!useMagicLink && !password)}
-              className="login-submit-btn"
-              icon={useMagicLink ? <Icon name="mail" /> : <Icon name="signIn" />}
+          {/* Error/Success Messages */}
+          {error && (
+            <div 
+              className="form-message form-message--error"
             >
-              {useMagicLink 
-                ? 'Send Magic Link' 
-                : isRegisterMode 
-                  ? 'Create Account' 
-                  : 'Sign In'
-              }
-            </Button>
+              <Icon name="warning" />
+              <span>{error}</span>
+            </div>
+          )}
 
-            {/* Magic Link Toggle */}
-            {!isRegisterMode && (
-              <button
-                type="button"
-                className="form-link"
-                onClick={toggleMagicLink}
-                disabled={isLoading}
-              >
-                {useMagicLink ? 'Use password instead' : 'Use magic link instead'}
-              </button>
-            )}
-          </motion.form>
+          {success && (
+            <div 
+              className="form-message form-message--success"
+            >
+              <Icon name="check" />
+              <span>{success}</span>
+            </div>
+          )}
 
-          {/* Mode Toggle */}
-          <motion.div 
-            className="login-footer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            variant="primary"
+            loading={isLoading}
+            disabled={!email || (!useMagicLink && !password)}
+            className="login-submit-btn"
+            icon={useMagicLink ? <Icon name="mail" /> : <Icon name="signIn" />}
           >
-            <p>
-              {isRegisterMode ? 'Already have an account?' : "Don't have an account?"}
-              <button
-                type="button"
-                className="form-link form-link--primary"
-                onClick={toggleMode}
-                disabled={isLoading}
-              >
-                {isRegisterMode ? 'Sign In' : 'Create Account'}
-              </button>
-            </p>
-          </motion.div>
-        </motion.div>
+            {useMagicLink 
+              ? 'Send Magic Link' 
+              : isRegisterMode 
+                ? 'Create Account' 
+                : 'Sign In'
+            }
+          </Button>
+
+          {/* Magic Link Toggle */}
+          {!isRegisterMode && (
+            <button
+              type="button"
+              className="form-link"
+              onClick={toggleMagicLink}
+              disabled={isLoading}
+            >
+              {useMagicLink ? 'Use password instead' : 'Use magic link instead'}
+            </button>
+          )}
+        </form>
+
+        {/* Mode Toggle */}
+        <div 
+          className="login-footer"
+        >
+          <p>
+            {isRegisterMode ? 'Already have an account?' : "Don't have an account?"}
+            <button
+              type="button"
+              className="form-link form-link--primary"
+              onClick={toggleMode}
+              disabled={isLoading}
+            >
+              {isRegisterMode ? 'Sign In' : 'Create Account'}
+            </button>
+          </p>
+        </div>
 
         {/* Background Elements */}
         <div className="login-bg-elements">

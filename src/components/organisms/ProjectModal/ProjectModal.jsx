@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../../hooks/useAuth.jsx';
 import { projectsAPI } from '../../../utils/supabase';
 import Button from '../../atoms/Button';
@@ -15,7 +15,7 @@ const ProjectModal = ({
   mode = 'view', // 'view', 'add', 'edit', 'delete'
   onSuccess 
 }) => {
-  const { isAuthenticated, isOwner } = useAuth();
+  const { isOwner } = useAuth();
   
   // Form state
   const [formData, setFormData] = useState({
@@ -124,7 +124,7 @@ const ProjectModal = ({
     try {
       new URL(string);
       return true;
-    } catch (_) {
+    } catch {
       return false;
     }
   };
@@ -229,7 +229,7 @@ const ProjectModal = ({
   return (
     <AnimatePresence>
       <div className="project-modal-overlay" onClick={onClose}>
-        <motion.div 
+        <div 
           className={`project-modal ${mode === 'delete' ? 'project-modal--danger' : ''}`}
           onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -446,7 +446,7 @@ const ProjectModal = ({
 
             {/* Error Message */}
             {error && (
-              <motion.div 
+              <div 
                 className="project-modal__error"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -454,7 +454,7 @@ const ProjectModal = ({
               >
                 <Icon name="warning" />
                 <span>{error}</span>
-              </motion.div>
+              </div>
             )}
           </div>
 
@@ -511,7 +511,7 @@ const ProjectModal = ({
               </>
             )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </AnimatePresence>
   );
