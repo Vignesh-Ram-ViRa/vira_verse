@@ -1,0 +1,7 @@
+/* Auth Layout - No header/footer */
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+} 

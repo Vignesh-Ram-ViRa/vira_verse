@@ -2,7 +2,7 @@
 
 .test-database {
   padding: 2rem;
-  max-width: 80rem;
+  max-width: 60rem;
   margin: 0 auto;
 }
 
@@ -25,19 +25,29 @@
   margin-bottom: 1rem;
 }
 
-.test-info p {
-  margin: 0.5rem 0;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
+.user-info {
+  background: var(--color-surface-elevated);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-family: monospace;
 }
 
-.test-actions {
+.user-info p {
+  margin: 0.5rem 0;
+  color: var(--color-text-primary);
+}
+
+.test-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: center;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
+}
+
+.fix-note {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
 .test-results {
@@ -93,6 +103,7 @@
 .projects-list {
   display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 
 .project-item {
@@ -109,16 +120,16 @@
   box-shadow: var(--color-shadow-lg);
 }
 
-.project-item h4 {
+.project-item h3 {
   color: var(--color-text-primary);
   margin: 0 0 0.5rem 0;
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 .project-item p {
   color: var(--color-text-secondary);
-  margin: 0 0 1rem 0;
-  line-height: 1.5;
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
 }
 
 .project-meta {

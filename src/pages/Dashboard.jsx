@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { projectsAPI } from '../utils/supabase';
+import { useAuth } from '../hooks/useAuth.jsx';
 import { LANGUAGE_CONTENT } from '../constants/language';
 import Icon from '../components/atoms/Icon';
+import Button from '../components/atoms/Button';
+import ProjectModal from '../components/organisms/ProjectModal/ProjectModal.jsx';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -10,6 +13,15 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Modal state
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    mode: 'view', // 'view', 'add', 'edit', 'delete'
+    project: null
+  });
+
+  const { isOwner } = useAuth();
 
   // Load projects on component mount
   useEffect(() => {
@@ -109,8 +121,43 @@ const Dashboard = () => {
   };
 
   const handleProjectClick = (project) => {
-    // TODO: Open project modal for editing/viewing
-    console.log('Project clicked:', project);
+    setModalState({
+      isOpen: true,
+      mode: isOwner ? 'edit' : 'view',
+      project
+    });
+  };
+
+  const handleAddProject = () => {
+    if (!isOwner) return;
+    
+    setModalState({
+      isOpen: true,
+      mode: 'add',
+      project: null
+    });
+  };
+
+  const handleModalClose = () => {
+    setModalState({
+      isOpen: false,
+      mode: 'view',
+      project: null
+    });
+  };
+
+  const handleModalSuccess = async (result, mode) => {
+    // Refresh projects list
+    await loadProjects();
+    
+    // Show success message (optional)
+    if (mode === 'add') {
+      console.log('Project added successfully:', result);
+    } else if (mode === 'edit') {
+      console.log('Project updated successfully:', result);
+    } else if (mode === 'delete') {
+      console.log('Project deleted successfully:', result);
+    }
   };
 
   const getStatusClass = (status) => {
@@ -167,31 +214,48 @@ const Dashboard = () => {
       {/* Projects Section */}
       <div className="dashboard-projects">
 
-        {/* Search Bar */}
+        {/* Controls Section */}
         <motion.div 
-          className="projects-search"
+          className="dashboard-controls"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <div className="search-container">
-            <Icon name="search" className="search-icon" />
-            <input
-              type="text"
-              className="search-input"
-              placeholder={LANGUAGE_CONTENT.projects.searchPlaceholder}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            {searchTerm && (
-              <button 
-                className="clear-search-btn"
-                onClick={() => setSearchTerm('')}
-                aria-label="Clear search"
-              >
-                <Icon name="close" />
-              </button>
-            )}
+          {/* Add Project Button (Always shown, disabled for guests) */}
+          <div className="dashboard-controls__actions">
+            <Button
+              variant="primary"
+              onClick={handleAddProject}
+              icon={<Icon name="add" />}
+              className="add-project-btn"
+              disabled={!isOwner}
+              title={!isOwner ? "Only the owner can add projects" : "Add new project"}
+            >
+              Add New Project
+            </Button>
+          </div>
+
+          {/* Search Bar */}
+          <div className="projects-search">
+            <div className="search-container">
+              <Icon name="search" className="search-icon" />
+              <input
+                type="text"
+                className="search-input"
+                placeholder={LANGUAGE_CONTENT.projects.searchPlaceholder}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchTerm && (
+                <button 
+                  className="clear-search-btn"
+                  onClick={() => setSearchTerm('')}
+                  aria-label="Clear search"
+                >
+                  <Icon name="close" />
+                </button>
+              )}
+            </div>
           </div>
         </motion.div>
 
@@ -362,6 +426,15 @@ const Dashboard = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        isOpen={modalState.isOpen}
+        onClose={handleModalClose}
+        project={modalState.project}
+        mode={modalState.mode}
+        onSuccess={handleModalSuccess}
+      />
     </div>
   );
 };

@@ -1,0 +1,297 @@
+/* Projects Page Shared Styles */
+
+.projects-page {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+/* Page Header */
+.projects-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+
+.projects-header-content {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.projects-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 1rem 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #ff8c6b 40%, #c471ed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+.projects-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Projects Content */
+.projects-content {
+  padding: 3rem 2rem 4rem;
+  max-width: 87.5rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Controls */
+.projects-controls {
+  margin-bottom: 3rem;
+}
+
+.projects-controls__actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.add-project-btn {
+  min-width: 10rem;
+}
+
+/* Search */
+.projects-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.25rem;
+  border-radius: 50%;
+}
+
+.clear-search-btn:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface-elevated);
+}
+
+/* Search Results */
+.search-results {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.results-text {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Loading, Error, Empty States */
+.projects-loading,
+.projects-error,
+.no-projects,
+.access-denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.loading-icon {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  animation: spin 1s linear infinite;
+}
+
+.projects-loading span {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+.projects-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 1rem;
+  color: var(--color-error);
+}
+
+.empty-icon,
+.access-denied-icon {
+  font-size: 4rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.access-denied-icon {
+  color: var(--color-primary);
+}
+
+.no-projects h3,
+.access-denied h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.75rem 0;
+}
+
+.no-projects p,
+.access-denied p {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 32rem;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Project Card - Inherits from Dashboard.css but with additions */
+.project-card.private {
+  filter: none; /* Override any global filter for private cards in owner view */
+}
+
+.project-card.private .private-badge {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(var(--color-primary-rgb), 0.9);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-header {
+    padding: 3rem 0 2rem;
+  }
+  
+  .projects-title {
+    font-size: 2.25rem;
+  }
+  
+  .projects-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .projects-content {
+    padding: 2rem 1rem 3rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+  
+  .search-container {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-title {
+    font-size: 2rem;
+  }
+  
+  .projects-subtitle {
+    font-size: 1rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .empty-icon,
+  .access-denied-icon {
+    font-size: 3rem;
+  }
+  
+  .projects-controls__actions {
+    margin-bottom: 1.5rem;
+  }
+} 

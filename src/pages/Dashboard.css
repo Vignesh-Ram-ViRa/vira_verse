@@ -33,9 +33,9 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(120, 219, 198, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(170, 150, 220, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(200, 180, 230, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(160, 190, 230, 0.2) 0%, transparent 50%);
   z-index: 1;
   pointer-events: none;
 }
@@ -97,20 +97,20 @@
   filter: blur(1px);
 }
 
-[data-theme="pastel"] .element-1 {
-  background: radial-gradient(circle, #ff9a9e, #fad0c4);
-  animation: float 8s ease-in-out infinite, pastelPulse 4s ease-in-out infinite;
-}
+        [data-theme="pastel"] .element-1 {
+          background: radial-gradient(circle, #c8b5e6, #e6d7ff);
+          animation: float 8s ease-in-out infinite, pastelPulse 4s ease-in-out infinite;
+        }
 
-[data-theme="pastel"] .element-2 {
-  background: radial-gradient(circle, #a8edea, #fed6e3);
-  animation: float 6s ease-in-out infinite reverse, pastelPulse 3s ease-in-out infinite;
-}
+        [data-theme="pastel"] .element-2 {
+          background: radial-gradient(circle, #a8c8ea, #d7e6ff);
+          animation: float 6s ease-in-out infinite reverse, pastelPulse 3s ease-in-out infinite;
+        }
 
-[data-theme="pastel"] .element-3 {
-  background: radial-gradient(circle, #d299c2, #fef9d7);
-  animation: float 10s ease-in-out infinite, pastelPulse 5s ease-in-out infinite;
-}
+        [data-theme="pastel"] .element-3 {
+          background: radial-gradient(circle, #b599d2, #e6d7ff);
+          animation: float 10s ease-in-out infinite, pastelPulse 5s ease-in-out infinite;
+        }
 
 @keyframes pastelPulse {
   0%, 100% {
@@ -162,6 +162,28 @@
   max-width: 87.5rem;
   margin: 0 auto;
   width: 100%;
+}
+
+/* Dashboard Controls */
+.dashboard-controls {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-controls__search {
+  flex: 1;
+  max-width: 35rem;
+}
+
+.dashboard-controls__actions {
+  display: flex;
+  align-items: center;
 }
 
 /* Header Section */

@@ -100,9 +100,9 @@ export const THEME_CONFIG = {
       accent: '#4ecdc4',
       accentRgb: '78, 205, 196',
 
-      // Background colors (vibrant and playful with 3D depth)
-      background: 'radial-gradient(ellipse at top left, #ff9a9e 0%, #fecfef 30%, #fecfef 60%, #f0c3f7 100%)',
-      backgroundSecondary: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+              // Background colors (vibrant and playful with 3D depth)
+        background: 'radial-gradient(ellipse at top left, #c8b5e6 0%, #e6d7ff 30%, #f0e6ff 60%, #ddd0f0 100%)',
+        backgroundSecondary: 'linear-gradient(135deg, #a8edea 0%, #e6d7ff 100%)',
       surface: 'rgba(255, 255, 255, 0.95)',
       surfaceElevated: 'rgba(255, 255, 255, 0.98)',
 

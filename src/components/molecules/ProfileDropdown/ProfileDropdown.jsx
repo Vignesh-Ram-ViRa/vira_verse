@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../hooks/useAuth.jsx';
 import Icon from '../../atoms/Icon';
 import { LANGUAGE_CONTENT } from '../../../constants/language';
 import './ProfileDropdown.css';
@@ -9,6 +10,7 @@ const ProfileDropdown = ({ className = '' }) => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const content = LANGUAGE_CONTENT;
+  const { user, isGuest, isAuthenticated, displayName, signOut } = useAuth();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -43,27 +45,56 @@ const ProfileDropdown = ({ className = '' }) => {
     navigate('/about');
   };
 
-  const handleLogout = () => {
+  const handleLogin = () => {
     setIsOpen(false);
-    // TODO: Implement actual logout logic
-    console.log('Logout clicked');
+    navigate('/login');
+  };
+
+  const handleLogout = async () => {
+    setIsOpen(false);
+    try {
+      await signOut();
+      navigate('/'); // Redirect to dashboard after logout
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  const getUserIcon = () => {
+    if (isGuest) return 'organization';
+    if (isAuthenticated) return 'account';
+    return 'person';
+  };
+
+  const getUserStatus = () => {
+    if (isGuest) return 'Guest Mode';
+    if (isAuthenticated) return 'Owner';
+    return 'Not Logged In';
   };
 
   return (
     <div className={`profile-dropdown ${className}`} ref={dropdownRef}>
       <button
-        className="profile-dropdown__trigger"
+        className={`profile-dropdown__trigger ${isGuest ? 'profile-dropdown__trigger--guest' : ''}`}
         onClick={handleToggle}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        title="Profile menu"
+        title={`${displayName} (${getUserStatus()})`}
       >
-        <Icon name="account" size="medium" />
+        <Icon name={getUserIcon()} size="medium" />
       </button>
 
       {isOpen && (
         <div className="profile-dropdown__menu">
           <div className="profile-dropdown__arrow" />
+          
+          {/* User Info */}
+          <div className="profile-dropdown__user-info">
+            <div className="profile-dropdown__user-name">{displayName}</div>
+            <div className="profile-dropdown__user-status">{getUserStatus()}</div>
+          </div>
+          
+          <div className="profile-dropdown__divider" />
           
           <button
             className="profile-dropdown__item"
@@ -73,15 +104,28 @@ const ProfileDropdown = ({ className = '' }) => {
             <span>About</span>
           </button>
           
-          <div className="profile-dropdown__divider" />
+          {!user && (
+            <button
+              className="profile-dropdown__item"
+              onClick={handleLogin}
+            >
+              <Icon name="signIn" size="small" />
+              <span>Login</span>
+            </button>
+          )}
           
-          <button
-            className="profile-dropdown__item profile-dropdown__item--danger"
-            onClick={handleLogout}
-          >
-            <Icon name="signOut" size="small" />
-            <span>{content.auth.logout}</span>
-          </button>
+          {user && (
+            <>
+              <div className="profile-dropdown__divider" />
+              <button
+                className="profile-dropdown__item profile-dropdown__item--danger"
+                onClick={handleLogout}
+              >
+                <Icon name="signOut" size="small" />
+                <span>{isGuest ? 'Exit Guest Mode' : content.auth.logout}</span>
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>

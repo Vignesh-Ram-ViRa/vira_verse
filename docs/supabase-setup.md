@@ -112,11 +112,26 @@ supabase functions deploy cloudinary-upload
 1. Go to **Authentication** → **Settings**
 2. Configure your site URL:
    - **Site URL**: `http://localhost:5173` (for development)
-   - **Redirect URLs**: Add your production domain when deploying
+   - **Redirect URLs**: Add `http://localhost:5173/**` for development
+   - **For production**: Update to your actual domain `https://yourdomain.com/**`
 
-3. Enable desired auth providers:
+3. **Email Confirmation Setup**:
+   - Go to **Authentication** → **Email Templates**
+   - Edit "Confirm signup" template if needed
+   - Default redirect works with the Site URL setting
+
+4. Enable desired auth providers:
    - **Email**: Enabled by default
    - **OAuth providers**: Configure as needed (Google, GitHub, etc.)
+
+### 🔧 Troubleshooting Email Confirmation
+
+**Problem**: Email confirmation links go to `localhost:5173` but you're checking email on a different device.
+
+**Solutions**:
+1. **Copy the confirmation link** from email and paste it in your development browser
+2. **Manual confirmation**: Go to Authentication → Users → find your email → "..." menu → Confirm User
+3. **Production**: Configure proper redirect URLs for your domain
 
 ## Step 9: Test Database Connection
 
